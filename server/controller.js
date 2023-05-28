@@ -110,6 +110,44 @@ module.exports = {
     createPet: (req, res) => {
         const {birdName, birdAge, weight, typeOfFood, amountBeingFed, poopColor, timeOutsideCage, speciesId} = req.body
 
-        
+        sequelize.query(`
+        INSERT INTO
+            pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id
+                VALUES
+                ('${birdName}, '${birdAge}', '${weight}', '${typeOfFood}', '${amountBeingFed}', '${poopColor}', '${timeOutsideCage}', '${speciesId}');
+                `)
+                .then((dbRes) => res.status(200).send(dbRes[0]))
+                .catch(err => console.log(err))
+    },
+
+    getPet: (req, res_ => {
+        sequelize.query(`
+            SELECT
+                pet.pet_id,
+                pet.name AS pet,
+                pet.bird_age,
+                pet.weight,
+                pet.type_of_food,
+                pet.amount_being_fed,
+                pet.poop_color,
+                pet.time_outside_cage,
+                species.species_id,
+                species.name AS species
+                FROM pet
+                JOIN species
+                ON pet.species_id = species.species_id;
+                `)
+                .then((dbRes) => res.status(200).send(dbRes[0]))
+                .catch(err => console.log(err))
+    }),
+
+    deletePet: (req, res) => {
+        const {id} = req.params
+
+        sequelize.query(`
+            DELETE FROM pet WHERE pet_id = ${id};
+            `)
+            .then((dbRes) => res.status(200).send(dbRes[0]))
+            .catch(err => console.log(err))
     }
 }
