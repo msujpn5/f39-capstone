@@ -73,13 +73,51 @@ function handleSubmit(event) {
         foodAmountInput.value = ''
         poopColorInput.value = ''
         exerciseInput.value = ''
-        getCities()
+        getPets()
     })
 }
 
 function deleteCard(id) {
     axios.delete(`http://localhost:4050/pet/${id}`)
-    .then(() => getCities)
+    .then(() => getPets())
     .catch(err => console.log(err))
 }
 
+function getPets() {
+    petList.innerHTML = ''
+
+    axios.get('http://localhost:4050/pet/')
+    .then(res => {
+        res.data.forEach(elem => {
+            let petCard = `<div class = "pet-card">
+            <h1>${elem.pet}</h1>
+            <h3>Age: ${elem['bird_age']}</h3>
+            <h3>Weight (in g): ${elem.weight}</h3>
+            <h3>Type of food: ${elem['type_of_food']}</h3>
+            <h3>Amount being fed (in g): ${elem['amount_being_fed']}</h3>
+            <h3>Poop color: ${elem['poop_color']}</h3>
+            <h3>Time outside cage (in min): ${elem['time_outside_cage']}</h3>
+            <button onclick = "deleteCard(${elem['pet_id']})">Delete</button>
+            </div>
+            `
+
+            petList.innerHTML += petCard
+        })
+    })
+}
+
+function getSpecies() {
+    axios.get('http://localhost:4050/species')
+    .then(res => {
+        res.data.forEach(species => {
+            const option = document.createElement('option')
+            option.setAttribute('value', species['species_id'])
+            option.textContent = species.nameInput
+            speciesSelect.appendChild(option)
+        })
+    })
+}
+
+getSpecies()
+getPets()
+form.addEventListener('submit', handleSubmit)
