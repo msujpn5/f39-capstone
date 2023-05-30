@@ -63,12 +63,20 @@ section {
     background-color: #f1f1f1;
     color: #333;
     font-family: sans-serif;
+    display: grid;
     text-align: center;
+    justify-content: center;
 }
 
+form {
+    display: grid;
+    height: 300px;
+    width: 200px;
+    margin-top: 20px;
+}
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom:0;
     width: 100%;
     text-align: center;

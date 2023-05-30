@@ -31,7 +31,7 @@ module.exports = {
                 type_of_food VARCHAR,
                 amount_being_fed INT,
                 poop_color VARCHAR,
-                time_outside_cage INT
+                time_outside_cage INT,
                 species_id INT REFERENCES species(species_id)
             );
 
@@ -66,7 +66,7 @@ module.exports = {
             ('Indian Ring-Necked Parakeet'),
             ('Jenday Conure'),
             ('Lilac-Crowned Amazon'),
-            ('Lory').
+            ('Lory'),
             ('Lovebird'),
             ('Macaw'),
             ('Meyers Parrot'),
@@ -90,7 +90,7 @@ module.exports = {
             ('Sun Conure'),
             ('Umbrella Cockatoo'),
             ('Vasa Parrot'),
-            ('White-Capped Pionus')
+            ('White-Capped Pionus'),
             ('Yellow-Naped Amazon Parrot'),
             ('Zebra Finch');
         `).then(() => {
@@ -111,16 +111,16 @@ module.exports = {
         const {birdName, birdAge, weight, typeOfFood, amountBeingFed, poopColor, timeOutsideCage, speciesId} = req.body
 
         sequelize.query(`
-        INSERT INTO
-            pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id
-                VALUES
+            INSERT INTO
+                pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id
+            VALUES
                 ('${birdName}, '${birdAge}', '${weight}', '${typeOfFood}', '${amountBeingFed}', '${poopColor}', '${timeOutsideCage}', '${speciesId}');
-                `)
-                .then((dbRes) => res.status(200).send(dbRes[0]))
-                .catch(err => console.log(err))
+        `)
+        .then((dbRes) => res.status(200).send(dbRes[0]))
+        .catch(err => console.log(err))
     },
 
-    getPet: (req, res_ => {
+    getPet: (req, res) => {
         sequelize.query(`
             SELECT
                 pet.pet_id,
@@ -133,21 +133,21 @@ module.exports = {
                 pet.time_outside_cage,
                 species.species_id,
                 species.name AS species
-                FROM pet
-                JOIN species
-                ON pet.species_id = species.species_id;
-                `)
-                .then((dbRes) => res.status(200).send(dbRes[0]))
-                .catch(err => console.log(err))
-    }),
+            FROM pet
+            JOIN species
+            ON pet.species_id = species.species_id;
+        `)
+        .then((dbRes) => res.status(200).send(dbRes[0]))
+        .catch(err => console.log(err))
+    },
 
     deletePet: (req, res) => {
         const {id} = req.params
 
         sequelize.query(`
             DELETE FROM pet WHERE pet_id = ${id};
-            `)
-            .then((dbRes) => res.status(200).send(dbRes[0]))
-            .catch(err => console.log(err))
+        `)
+        .then((dbRes) => res.status(200).send(dbRes[0]))
+        .catch(err => console.log(err))
     }
 }

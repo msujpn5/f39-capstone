@@ -9,8 +9,8 @@ const poopColorInput = document.querySelector('#poop-color')
 const exerciseInput = document.querySelector('#exercise')
 const petList = document.querySelector('#pet-list')
 
-function handleSubmit(event) {
-    event.preventDefault()
+function handleSubmit(e) {
+    e.preventDefault()
 
     if (nameInput.value < 1) {
         alert ('You must enter a valid name')
@@ -73,17 +73,17 @@ function handleSubmit(event) {
         foodAmountInput.value = ''
         poopColorInput.value = ''
         exerciseInput.value = ''
-        getPets()
+        getPet()
     })
 }
 
 function deleteCard(id) {
     axios.delete(`http://localhost:4050/pet/${id}`)
-    .then(() => getPets())
+    .then(() => getPet())
     .catch(err => console.log(err))
 }
 
-function getPets() {
+function getPet() {
     petList.innerHTML = ''
 
     axios.get('http://localhost:4050/pet/')
@@ -112,12 +112,12 @@ function getSpecies() {
         res.data.forEach(species => {
             const option = document.createElement('option')
             option.setAttribute('value', species['species_id'])
-            option.textContent = species.nameInput
+            option.textContent = species.name
             speciesSelect.appendChild(option)
         })
     })
 }
 
 getSpecies()
-getPets()
+getPet()
 form.addEventListener('submit', handleSubmit)

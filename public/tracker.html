@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bird Health Tracker</title>
-<link rel="stylesheet" href="tracker.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="tracker.css">
 </head>
 <body>
 <nav>
@@ -22,28 +25,28 @@
     <h2>Let's get some info about your bird</h2>
     <form id="bird-form">
         <label for="bird-name">Bird Name:</label>
-        <input type="text" id="bird-name"><br>
+        <input type="text" id="bird-name">
 
         <label for="species">Species:</label>
-        <select id="species-select"></select><br>
+        <select id="species-select"></select>
 
         <label for="age">Bird Age:</label>
-        <input type="text" id="age"><br>
+        <input type="text" id="age">
 
         <label for="weight">Weight (in grams):</label>
-        <input type="text" id="weight"><br>
+        <input type="text" id="weight">
 
         <label for="food">Type of Food:</label>
-        <input type="text" id="food"><br>
+        <input type="text" id="food">
 
         <label for="food-amount">Amount Being Fed:</label>
-        <input type="text" id="food-amount"><br>
+        <input type="text" id="food-amount">
 
         <label for="poop-color">Poop Color:</label>
-        <input type="text" id="poop-color"><br>
+        <input type="text" id="poop-color">
 
         <label for="exercise">Time Outside Cage (in mins):</label>
-        <input type="text" id="exercise"><br><br>
+        <input type="text" id="exercise"><br>
         
         <button>Add</button>
     </form>
@@ -55,5 +58,8 @@
 <footer>
     <p>&copy; 2023 My Capstone. All rights reserved.</p>
 </footer>
+
+<script src="../node_modules/axios/dist/axios.min.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
