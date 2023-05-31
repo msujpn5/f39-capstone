@@ -1,4 +1,4 @@
-const form = document.querySelector('form1')
+const form = document.getElementById('form1')
 const nameInput = document.querySelector('#bird-name')
 const speciesSelect = document.querySelector('#species-select')
 const ageInput = document.querySelector('#age')
@@ -9,6 +9,7 @@ const poopColorInput = document.querySelector('#poop-color')
 const exerciseInput = document.querySelector('#exercise')
 const petList = document.querySelector('#pet-list')
 
+
 function handleSubmit(e) {
     e.preventDefault()
 
@@ -16,12 +17,6 @@ function handleSubmit(e) {
         alert ('You must enter a valid name')
         return
     }
-
-    if (nameInput.value < 1) {
-        alert ('You must enter a valid name')
-        return
-    }
-
 
     if (ageInput.value < 1) {
         alert ('You must enter a valid age')
@@ -65,15 +60,15 @@ function handleSubmit(e) {
 
     axios.post('http://localhost:4050/pet', body)
     .then(() => {
-        speciesSelect.value = 1
-        nameInput.value = ''
-        ageInput.value = ''
-        weightInput.value = ''
-        foodInput.value = ''
-        foodAmountInput.value = ''
-        poopColorInput.value = ''
-        exerciseInput.value = ''
-        getPet()
+        speciesSelect.value = 1;
+        nameInput.value = '';
+        ageInput.value = '';
+        weightInput.value = '';
+        foodInput.value = '';
+        foodAmountInput.value = '';
+        poopColorInput.value = '';
+        exerciseInput.value = '';
+        // getPet()
     })
 }
 
@@ -87,18 +82,18 @@ function getPet() {
     petList.innerHTML = ''
 
     axios.get('http://localhost:4050/pet/')
-    .then(res => {
-        res.data.forEach(elem => {
-            let petCard = `<div class = "pet-card">
-            <h1>${elem.pet}</h1>
-            <h3>Age: ${elem['bird_age']}</h3>
-            <h3>Weight (in g): ${elem.weight}</h3>
-            <h3>Type of food: ${elem['type_of_food']}</h3>
-            <h3>Amount being fed (in g): ${elem['amount_being_fed']}</h3>
-            <h3>Poop color: ${elem['poop_color']}</h3>
-            <h3>Time outside cage (in min): ${elem['time_outside_cage']}</h3>
-            <button onclick = "deleteCard(${elem['pet_id']})">Delete</button>
-            </div>
+        .then(res => {
+            res.data.forEach(elem => {
+                let petCard = `<div class = "pet-card">
+                <h2>${elem['bird_name']}</h2>
+                <h3>Age: ${elem['bird_age']}</h3>
+                <h3>Weight (in g): ${elem['weight']}</h3>
+                <h3>Type of food: ${elem['type_of_food']}</h3>
+                <h3>Amount being fed (in g): ${elem['amount_being_fed']}</h3>
+                <h3>Poop color: ${elem['poop_color']}</h3>
+                <h3>Time outside cage (in min): ${elem['time_outside_cage']}</h3>
+                <button onclick="deleteCard(${elem['pet_id']})">Delete</button>
+                </div>
             `
 
             petList.innerHTML += petCard
@@ -108,14 +103,14 @@ function getPet() {
 
 function getSpecies() {
     axios.get('http://localhost:4050/species')
-    .then(res => {
-        res.data.forEach(species => {
-            const option = document.createElement('option')
-            option.setAttribute('value', species['species_id'])
-            option.textContent = species.name
-            speciesSelect.appendChild(option)
+        .then(res => {
+            res.data.forEach(species => {
+                const option = document.createElement('option')
+                option.setAttribute('value', species['species_id'])
+                option.textContent = species.name
+                speciesSelect.appendChild(option)
+            })
         })
-    })
 }
 
 getSpecies()

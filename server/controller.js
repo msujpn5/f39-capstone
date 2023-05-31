@@ -20,7 +20,7 @@ module.exports = {
 
             CREATE TABLE species (
                 species_id SERIAL PRIMARY KEY,
-                name varchar
+                name VARCHAR
             );
 
             CREATE TABLE pet (
@@ -101,7 +101,7 @@ module.exports = {
 
     getSpecies: (req, res) => {
         sequelize.query(`
-        SELECT * FROM species
+            SELECT * FROM species
         `)
         .then((dbRes) => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
@@ -110,12 +110,8 @@ module.exports = {
     createPet: (req, res) => {
         const {birdName, birdAge, weight, typeOfFood, amountBeingFed, poopColor, timeOutsideCage, speciesId} = req.body
 
-        sequelize.query(`
-            INSERT INTO
-                pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id
-            VALUES
-                ('${birdName}, '${birdAge}', '${weight}', '${typeOfFood}', '${amountBeingFed}', '${poopColor}', '${timeOutsideCage}', '${speciesId}');
-        `)
+        const queryString = `INSERT INTO pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id) VALUES ('${birdName}', ${birdAge}, ${weight}, '${typeOfFood}', ${amountBeingFed}, '${poopColor}', ${timeOutsideCage}, ${speciesId});`
+        sequelize.query(queryString)
         .then((dbRes) => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
@@ -124,7 +120,7 @@ module.exports = {
         sequelize.query(`
             SELECT
                 pet.pet_id,
-                pet.name AS pet,
+                pet.bird_name,
                 pet.bird_age,
                 pet.weight,
                 pet.type_of_food,
