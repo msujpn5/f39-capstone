@@ -63,9 +63,10 @@ section {
     background-color: #f1f1f1;
     color: #333;
     font-family: sans-serif;
-    display: grid;
     text-align: center;
+    display: grid;
     justify-content: center;
+    justify-items: center;
 }
 
 form {
