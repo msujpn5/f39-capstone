@@ -74,6 +74,7 @@ form {
     height: 300px;
     width: 200px;
     margin-top: 20px;
+    margin-right: 50px;
 }
 
 footer {
@@ -85,4 +86,19 @@ footer {
     background-color: #333;
     color: white;
     font-family: sans-serif;
+}
+
+.pet-card {
+    border: 1px solid black;
+    padding: 20px;
+    margin: 20px;
+}
+
+.pet-card > h2 {
+    margin-bottom: 10px;
+}
+
+.pet-card > button {
+    margin-top: 10px;
+    padding: 2px 10px;
 }

@@ -68,7 +68,7 @@ function handleSubmit(e) {
         foodAmountInput.value = '';
         poopColorInput.value = '';
         exerciseInput.value = '';
-        // getPet()
+        getPet()
     })
 }
 
