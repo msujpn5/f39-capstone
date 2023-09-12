@@ -111,6 +111,7 @@ module.exports = {
         const {birdName, birdAge, weight, typeOfFood, amountBeingFed, poopColor, timeOutsideCage, speciesId} = req.body
 
         const queryString = `INSERT INTO pet (bird_name, bird_age, weight, type_of_food, amount_being_fed, poop_color, time_outside_cage, species_id) VALUES ('${birdName}', ${birdAge}, ${weight}, '${typeOfFood}', ${amountBeingFed}, '${poopColor}', ${timeOutsideCage}, ${speciesId});`
+        console.log("Executing SQL query:", queryString);
         sequelize.query(queryString)
         .then((dbRes) => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
