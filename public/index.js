@@ -58,7 +58,7 @@ function handleSubmit(e) {
         speciesId: +speciesSelect.value
     }
 
-    axios.post('http://localhost:4050/pet', body)
+    axios.post('/pet', body)
     .then(() => {
         speciesSelect.value = 1;
         nameInput.value = '';
@@ -73,7 +73,7 @@ function handleSubmit(e) {
 }
 
 function deleteCard(id) {
-    axios.delete(`http://localhost:4050/pet/${id}`)
+    axios.delete(`/pet/${id}`)
     .then(() => getPet())
     .catch(err => console.log(err))
 }
@@ -81,7 +81,7 @@ function deleteCard(id) {
 function getPet() {
     petList.innerHTML = ''
 
-    axios.get('http://localhost:4050/pet/')
+    axios.get('/pet/')
         .then(res => {
             res.data.forEach(elem => {
                 let petCard = `<div class = "pet-card">
@@ -102,7 +102,7 @@ function getPet() {
 }
 
 function getSpecies() {
-    axios.get('http://localhost:4050/species')
+    axios.get('/species')
         .then(res => {
             res.data.forEach(species => {
                 const option = document.createElement('option')
