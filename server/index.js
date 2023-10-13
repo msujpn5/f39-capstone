@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const {SERVER_PORT} = process.env.PORT || 4050
+const port = process.env.PORT || 4050
 const {seed, getSpecies, getPet, createPet, deletePet} = require('./controller.js')
 
 app.use(express.json())
@@ -17,5 +17,5 @@ app.post('/pet', createPet)
 app.get('/pet', getPet)
 app.delete('/pet/:id', deletePet)
 
-app.listen(SERVER_PORT, () => console.log(`up on ${SERVER_PORT}`))
+app.listen(port, () => console.log(`up on ${port}`))
 
