@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const {SERVER_PORT} = process.env
+const {SERVER_PORT} = process.env.PORT || 4050
 const {seed, getSpecies, getPet, createPet, deletePet} = require('./controller.js')
 
 app.use(express.json())
